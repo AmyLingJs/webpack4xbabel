@@ -1,0 +1,31 @@
+{
+    //babel-loader: 用 babel 转换 ES6 代码需要使用到 babel-loader
+//@babel-preset-env： 默认情况下是等于 ES2015 + ES2016 + ES2017，也就是说它对这三个版本的 ES 语法进行转化。
+//@babel/core：babel 核心库
+//presets 是一堆 plugins 的预设，起到方便的作用。
+//plugins 是编码转化工具，babel 会根据你配置的插件对代码进行相应的转化
+/**
+babel-runtime 的作用：
+
+提取辅助函数。ES6 转码时，babel 会需要一些辅助函数，例如 _extend。babel 默认会将这些辅助函数内联到每一个 js 文件里， babel 提供了 transform-runtime 来将这些辅助函数“搬”到一个单独的模块 babel-runtime 中，这样做能减小项目文件的大小。
+提供 polyfill：不会污染全局作用域，但是不支持实例方法如 Array.includes
+
+babel-runtime 更像是分散的 polyfill 模块，需要在各自的模块里单独引入，借助 transform-runtime 插件来自动化处理这一切，也就是说你不要在文件开头 import 相关的 polyfill，你只需使用，transform-runtime 会帮你引入。
+对于开发应用来说，直接使用上述的按需 polyfill 方案是比较方便的，但如果是开发工具、库的话，这种方案未必适合（babel-polyfill 是通过向全局对象和内置对象的 prototype 上添加方法实现的，会造成全局变量污染）。Babel 提供了另外一种方案 transform-runtime，它在编译过程中只是将需要 polyfill 的代码引入了一个指向 core-js 中对应模块的链接(alias)
+
+*/
+    "presets": [
+        [
+            "@babel/preset-env",{
+                "modules":false,
+                "targets":{
+                    "browsers":[">1%","last 2 versions","not ie<=8"]
+                },
+                "useBuiltIns":"usage"
+
+            }
+        ]
+    ],
+
+    "plugins": ["@babel/plugin-transform-runtime"]
+}
