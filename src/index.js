@@ -1,2 +1,2 @@
-console.log(22222)
- import Vue from "vue";
+console.log(100000)
+import Vue from "vue";
