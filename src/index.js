@@ -1,2 +1,2 @@
-console.log(100000)
+console.log(78954225)
 import Vue from "vue";
